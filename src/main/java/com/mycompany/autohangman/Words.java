@@ -21,8 +21,11 @@ import org.json.JSONObject;
 public class Words {
     
     private static String secretWord = " "; 
-    
-    
+
+    public static String getSecretWord() {
+        return secretWord;
+    }
+     
 
     public static void getRequest(){
         
