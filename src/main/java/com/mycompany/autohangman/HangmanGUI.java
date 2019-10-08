@@ -5,17 +5,26 @@
  */
 package com.mycompany.autohangman;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author dayanarios
  */
 public class HangmanGUI extends javax.swing.JFrame {
-
+    private final String[] hangmanImages = {"head.png", "body.png", "arm1.png", "arm2.png", "leg1.png", "leg2.png"}; 
+    
     /**
      * Creates new form HangmanGUI
      */
     public HangmanGUI() {
         initComponents();
+        setIcon(4);
     }
 
     /**
@@ -27,22 +36,85 @@ public class HangmanGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        TitleLabel = new javax.swing.JLabel();
+        hangmanImgLabel = new javax.swing.JLabel();
+        guessLabel = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        TitleLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        TitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TitleLabel.setText("Auto Solving Hangman");
+
+        guessLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        guessLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        guessLabel.setText("Word: ");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(148, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(hangmanImgLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TitleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(148, 148, 148))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(guessLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(TitleLabel)
+                .addGap(31, 31, 31)
+                .addComponent(hangmanImgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(guessLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    public void setIcon(int imageNum){
+        BufferedImage img = null;   
+        Image dimg = null; //resized image
+
+        try {
+            String path =  System.getProperty("user.dir") + "/src/main/resources/" + hangmanImages[imageNum];// getClass().getResource("/head.png").toString(); //IIOException: Can't read input file! path /target/classes not src/main/resources
+            System.out.println(path); 
+            img = ImageIO.read(new File(path));
+            dimg = img.getScaledInstance(hangmanImgLabel.getWidth(), hangmanImgLabel.getHeight(),
+            Image.SCALE_SMOOTH);
+            hangmanImgLabel.setIcon(new ImageIcon(dimg));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -79,5 +151,9 @@ public class HangmanGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel TitleLabel;
+    private javax.swing.JLabel guessLabel;
+    private javax.swing.JLabel hangmanImgLabel;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
