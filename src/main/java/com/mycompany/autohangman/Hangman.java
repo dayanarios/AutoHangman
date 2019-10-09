@@ -12,16 +12,19 @@ package com.mycompany.autohangman;
 public class Hangman {
     
     private static String secretWord; 
-    private static Words wordAPI = new Words(); 
+    private static double frequency; 
     
     public Hangman(){
-        wordAPI.getRequest(); 
-        secretWord = wordAPI.getSecretWord(); 
+        secretWord = Words.getWord(); 
+        frequency = Words.getFrequency(); 
+        
     }
 
     public static String getSecretWord() {
         return secretWord;
     }
+    
+    
     
     
     

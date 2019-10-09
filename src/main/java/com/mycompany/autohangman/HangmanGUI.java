@@ -105,7 +105,6 @@ public class HangmanGUI extends javax.swing.JFrame {
 
         try {
             String path =  System.getProperty("user.dir") + "/src/main/resources/" + hangmanImages[imageNum];// getClass().getResource("/head.png").toString(); //IIOException: Can't read input file! path /target/classes not src/main/resources
-            System.out.println(path); 
             img = ImageIO.read(new File(path));
             dimg = img.getScaledInstance(hangmanImgLabel.getWidth(), hangmanImgLabel.getHeight(),
             Image.SCALE_SMOOTH);
@@ -117,9 +116,10 @@ public class HangmanGUI extends javax.swing.JFrame {
     }
     
     public void setWord(){
+      System.out.println("secret word: " + game.getSecretWord()); 
       String noChars = game.getSecretWord().replaceAll("[a-zA-Z0-9]", "_");
       noChars = noChars.replace("", " "); 
-      //System.out.println(noChars); 
+      System.out.println(noChars); 
       guessLabel.setText(noChars); 
     }
     /**
